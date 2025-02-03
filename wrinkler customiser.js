@@ -1,16 +1,9 @@
 	Game.registerMod("wrinklerCustomiser",{
 		init:function(){
-			this.createUpgrades()
-			Game.registerHook("check", this.unlockUpgrades)
-			LocalizeUpgradesAndAchievs()
-			Game.getWrinklersMax=function(){return Game.mods.wrinklerCustomiser.wrinklerCount}
-		},
-		wrinklerCount:Game.wrinklerLimit,
-		shinyChance:0.0001,
-		createUpgrades: function(){
-			this.switches = []
-			this.switches.push(new Game.Upgrade('Wrinkler Customiser','Allows you to customise how many wrinklers you have, what type they are, and how frequently shiny wrinklers spawn.',0,[19,8],function(){
-				Game.Upgrades['Wrinkler Customiser'].bought=0
+			Game.registerHook("check", this.unlockUpgrades);
+			Game.getWrinklersMax=function(){return Game.mods.wrinklerCustomiser.wrinklerCount};
+			new Game.Upgrade('Wrinkler Customiser','Allows you to customise how many wrinklers you have, what type they are, and how frequently shiny wrinklers spawn.',0,[19,8],function(){
+				Game.Upgrades['Wrinkler Customiser'].bought=0;
 				Game.Prompt('<h3>Customise Your Wrinklers</h3>'+
 					'<div class="line"></div>'+
 					'<div style="text-align:center;">'+
@@ -25,10 +18,13 @@
 					'<div class="line"></div>'+
 					'<div class=optionBox"><a class="option focused" onclick="PlaySound(\'snd/tick.mp3\');Game.mods.wrinklerCustomiser.updateWrinklerCount()">Spawn Wrinklers</a></div>'+
 					'','');
-			}))
+			});
 			Game.Upgrades['Wrinkler Customiser'].order=16000;
-			Game.Upgrades['Wrinkler Customiser'].pool='toggle'
+			Game.Upgrades['Wrinkler Customiser'].pool='toggle';
+			LocalizeUpgradesAndAchievs();
 		},
+		wrinklerCount:Game.wrinklerLimit,
+		shinyChance:0.0001,
 		decideWrinklerType:function(){
 		if (Math.random()<Game.mods.wrinklerCustomiser.shinyChance) {return 1} else {return 0}
 		},
